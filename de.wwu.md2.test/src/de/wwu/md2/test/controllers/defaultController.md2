@@ -1,0 +1,28 @@
+package de.wwu.md2.test.controllers
+
+/*
+ * Implement the controller here
+ */
+main {
+	appName "Test Application"
+	appVersion "0.1"
+	modelVersion "0.1"
+	onInitialized init
+	startView mainView.tab1
+	defaultWorkflow DefaultWorkflow
+}
+
+action CombinedAction init {
+	
+}
+
+contentProvider Customer CustomerProvider {
+	providerType local
+}
+
+workflow DefaultWorkflow {
+	step step1:
+		view mainView.tab1
+	step step2:
+		view mainView.tab2
+}

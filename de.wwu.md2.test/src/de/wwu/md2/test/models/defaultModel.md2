@@ -1,0 +1,19 @@
+package de.wwu.md2.test.models
+
+/*
+ * Implement the model here
+ */
+entity Customer {
+	firstName : string
+	lastName : string
+	dateOfBirth : date{
+		name "Date of birth"
+		description "Please specify your date of birth"
+	}
+}
+
+entity Address {
+	street : string
+	zip : string
+	city : string
+}

@@ -13,7 +13,11 @@ main {
 }
 
 action CombinedAction init {
-	
+	actions bindValidators
+}
+
+action CustomAction bindValidators {
+	bind validator NotNullValidator(message "Please specify a street.") on mainView.tab2.street
 }
 
 contentProvider Customer CustomerProvider {

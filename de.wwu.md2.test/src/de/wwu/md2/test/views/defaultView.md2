@@ -4,15 +4,22 @@ package de.wwu.md2.test.views
  * Implement the view here
  */
 TabbedPane mainView {
-	FlowLayoutPane tab1(vertical) {
+	FlowLayoutPane customerPane(tabTitle "Customer", vertical) {
 		AutoGenerator customerGenerator {
 			contentProvider CustomerProvider
 		}
 	}
-	GridLayoutPane tab2(columns 2) {
-		TextInput street {
-			label "Street / Nr"
-			tooltip "Please enter your street and number."
-		}
+	
+	addressPane(tabTitle "Address")
+}
+
+GridLayoutPane addressPane(columns 2) {
+	TextInput street {
+		label "Street / Nr"
+		tooltip "Please enter your street and number."
+	}
+	OptionInput type {
+		label "Address type"
 	}
 }
+

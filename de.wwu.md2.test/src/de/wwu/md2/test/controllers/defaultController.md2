@@ -8,25 +8,34 @@ main {
 	appVersion "0.1"
 	modelVersion "0.1"
 	onInitialized init
-	startView mainView.tab1
+	startView mainView.customerPane
 	defaultWorkflow DefaultWorkflow
 }
 
 action CombinedAction init {
-	actions bindValidators
+	actions bindValidators mapAddress
 }
 
 action CustomAction bindValidators {
-	bind validator NotNullValidator(message "Please specify a street.") on mainView.tab2.street
+	bind validator NotNullValidator(message "Please specify a street.") on addressPane.street
+}
+
+action CustomAction mapAddress {
+	map addressPane.street to AddressProvider.street
+	map addressPane.type to AddressProvider.type
 }
 
 contentProvider Customer CustomerProvider {
 	providerType local
 }
 
+contentProvider Address AddressProvider {
+	providerType local
+}
+
 workflow DefaultWorkflow {
 	step step1:
-		view mainView.tab1
+		view mainView.customerPane
 	step step2:
-		view mainView.tab2
+		view addressPane
 }

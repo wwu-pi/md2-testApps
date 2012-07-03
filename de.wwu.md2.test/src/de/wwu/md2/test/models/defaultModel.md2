@@ -16,4 +16,9 @@ entity Address {
 	street : string
 	zip : string
 	city : string
+	type : AddressType
+}
+
+enum AddressType {
+	"Private", "Business"
 }

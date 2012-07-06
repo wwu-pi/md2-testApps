@@ -10,7 +10,7 @@ TabbedPane mainView {
 		}
 	}
 	
-	addressPane(tabTitle "Address")
+	addressPane -> customerAddress(tabTitle "Address")
 }
 
 GridLayoutPane addressPane(columns 2) {

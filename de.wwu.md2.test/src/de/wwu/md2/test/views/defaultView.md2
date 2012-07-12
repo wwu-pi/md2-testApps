@@ -18,7 +18,7 @@ GridLayoutPane addressPane(columns 2) {
 		label "Street / Nr"
 		tooltip "Please enter your street and number."
 	}
-	OptionInput type {
+	OptionInput addressType {
 		label "Address type"
 	}
 }

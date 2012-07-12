@@ -22,7 +22,7 @@ action CustomAction bindValidators {
 
 action CustomAction mapAddress {
 	map addressPane.street to AddressProvider.street
-	map addressPane.type to AddressProvider.type
+	map addressPane.addressType to AddressProvider.addressType
 }
 
 contentProvider Customer CustomerProvider {
@@ -37,5 +37,5 @@ workflow DefaultWorkflow {
 	step step1:
 		view mainView.customerPane
 	step step2:
-		view addressPane
+		view mainView.customerAddress
 }

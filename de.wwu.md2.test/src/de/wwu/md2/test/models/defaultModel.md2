@@ -13,10 +13,10 @@ entity Customer {
 }
 
 entity Address {
-	street : string
+	street : string(optional)
 	zip : string
 	city : string
-	type : AddressType
+	addressType : AddressType
 }
 
 enum AddressType {

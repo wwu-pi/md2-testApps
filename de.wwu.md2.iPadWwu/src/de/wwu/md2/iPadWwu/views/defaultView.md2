@@ -1,0 +1,27 @@
+package de.wwu.md2.iPadWwu.views
+
+/*
+ * Implement the view here
+ */
+GridLayoutPane start(columns 2) {
+	FlowLayoutPane fragebogen(vertical) {
+		Label fragenLabel("Fragebogen") {
+			style {
+				fontSize 20
+			}
+		}
+		AutoGenerator fragebogenGenerator {
+			contentProvider Daten(exclude Fragebogen.unternehmen)
+		}
+	}
+	FlowLayoutPane unternehmen(vertical) {
+		Label unternehmenLabel("Angaben zum Unternehmen") {
+			style {
+				fontSize 20
+			}
+		}
+		AutoGenerator unternehmenGenerator {
+			contentProvider Daten(only Fragebogen.unternehmen)
+		}
+	}
+}

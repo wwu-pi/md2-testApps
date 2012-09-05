@@ -1,0 +1,22 @@
+package de.wwu.md2.iPadWwu.models
+
+/*
+ * Implement the model here
+ */
+entity Fragebogen {
+	mitarbeiterzahl : integer {
+		name "Wie viele Mitarbeiter hat Ihr Unternehmen?"
+	}
+	entwickeltApps : boolean {
+		name "Mein Unternehmen entwickelt Apps."
+	}
+	bedeutungApps : {"Wichtig", "Normal wichtig", "Unwichtig"}  {
+		name "Wie wichtig sind Apps für Ihr Unternehmen?"
+	}
+	unternehmen : Unternehmen
+}
+
+entity Unternehmen {
+	name : string
+	bestehtSeit : date
+}

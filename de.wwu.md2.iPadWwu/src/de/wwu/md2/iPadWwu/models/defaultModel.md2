@@ -13,6 +13,9 @@ entity Fragebogen {
 	bedeutungApps : {"Wichtig", "Normal wichtig", "Unwichtig"}  {
 		name "Wie wichtig sind Apps für Ihr Unternehmen?"
 	}
+	hardware : boolean {
+		name "Nutzen Sie die Hardware?"
+	}
 	unternehmen : Unternehmen
 }
 

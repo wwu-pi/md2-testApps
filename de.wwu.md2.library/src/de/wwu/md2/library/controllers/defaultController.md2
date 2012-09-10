@@ -1,0 +1,34 @@
+package de.wwu.md2.library.controllers
+
+/*
+ * Implement the controller here
+ */
+main {
+	appName "Library Application"
+	appVersion "0.1"
+	modelVersion "0.1"
+	startView MainView
+	onInitialized init
+	defaultConnection wipc062
+}
+
+action CombinedAction init {
+	actions bindEvents
+}
+
+action CustomAction bindEvents {
+	bind action loadBook on MainView.loadBookBtn.onTouch
+}
+
+action CustomAction loadBook {
+	call DataAction(load bookProvider)
+}
+
+contentProvider Book bookProvider {
+	providerType default
+	filter first where Book.isbn equals MainView.bookInfoPart[Book.isbn]
+}
+
+remoteConnection wipc062 {
+	uri "http://wipc062.uni-muenster.de:8080/de.wwu.md2.library.backend/service"
+}

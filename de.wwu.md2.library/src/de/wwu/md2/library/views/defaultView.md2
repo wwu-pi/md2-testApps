@@ -1,0 +1,17 @@
+package de.wwu.md2.library.views
+
+/*
+ * Implement the view here
+ */
+FlowLayoutPane MainView(vertical) {
+	Label bookHeader {
+		text "Book"
+		style { fontSize 20 }
+	}
+	
+	AutoGenerator bookInfoPart {
+		contentProvider bookProvider
+	}
+	
+	Button loadBookBtn ("Load")
+}

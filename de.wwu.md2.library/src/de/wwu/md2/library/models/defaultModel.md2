@@ -1,0 +1,15 @@
+package de.wwu.md2.library.models
+
+/*
+ * Implement the model here
+ */
+entity Book{
+	title : string
+	author : string(optional)
+	isbn : string
+}
+
+entity LoanRequest{
+	bookRequested : Book
+	eMail : string 
+}

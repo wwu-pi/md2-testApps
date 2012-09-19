@@ -6,12 +6,38 @@ package de.wwu.md2.library.views
 FlowLayoutPane MainView(vertical) {
 	Label bookHeader {
 		text "Book"
-		style { fontSize 20 }
+		style HeaderStyle
 	}
 	
 	AutoGenerator bookInfoPart {
 		contentProvider bookProvider
 	}
 	
-	Button loadBookBtn ("Load")
+	Button loadBookBtn ("Load book from ISBN")
+	
+	Label loanHeader {
+		text "Request Loan"
+		style HeaderStyle
+	}
+	
+	TextInput loanEMail {
+		label "Email address"
+		tooltip "Please provide your email address to request a loan of this book."
+	}
+	
+	Button loanBtn ("Loan this book")
+}
+
+FlowLayoutPane InfoView(vertical) {
+	Label info("Info.")
+}
+
+TabbedPane TabbedView {
+	MainView -> Main
+	InfoView(tabTitle "Info")
+}
+
+style HeaderStyle {
+	fontSize 20
+	textStyle bold
 }

@@ -6,10 +6,13 @@ package de.wwu.md2.library.models
 entity Book{
 	title : string
 	author : string(optional)
-	isbn : string
+	isbn : string {
+		name "ISBN"
+		description "ISBN, only digits, without hyphens or space"
+	}
 }
 
 entity LoanRequest{
 	bookRequested : Book
-	eMail : string 
+	email : string 
 }

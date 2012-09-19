@@ -7,26 +7,43 @@ main {
 	appName "Library Application"
 	appVersion "0.1"
 	modelVersion "0.1"
-	startView MainView
+	startView TabbedView.Main
 	onInitialized init
 	defaultConnection wipc062
 }
 
 action CombinedAction init {
-	actions bindEvents
+	actions bindEvents mapFields
 }
 
 action CustomAction bindEvents {
 	bind action loadBook on MainView.loadBookBtn.onTouch
+	bind action sendLoanRequest on MainView.loanBtn.onTouch
+}
+
+action CustomAction mapFields {
+	map MainView.loanEMail to loanProvider.email
+	// regex simplified and wrong
+	bind validator RegExValidator(regEx "[a-z]+@[a-z]+\\.[a-z]+") on MainView.loanEMail
 }
 
 action CustomAction loadBook {
 	call DataAction(load bookProvider)
+	call NewObjectAction(loanProvider)
+}
+
+action CustomAction sendLoanRequest {
+	call AssignObjectAction(use bookProvider for loanProvider.bookRequested)
+	call DataAction(save loanProvider)
 }
 
 contentProvider Book bookProvider {
 	providerType default
-	filter first where Book.isbn equals MainView.bookInfoPart[Book.isbn]
+	filter first where Book.isbn equals TabbedView.Main->MainView.bookInfoPart[Book.isbn]
+}
+
+contentProvider LoanRequest loanProvider {
+	providerType default
 }
 
 remoteConnection wipc062 {

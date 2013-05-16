@@ -1,0 +1,14 @@
+package de.wwu.md2.backend2.controllers
+
+/*
+ * Implement the controller here
+ */
+main {
+	appName "Backend Test 2"
+	appVersion "0.1"
+	modelVersion "0.1"
+	startView View
+	onInitialized Init
+}
+
+action CustomAction Init {}

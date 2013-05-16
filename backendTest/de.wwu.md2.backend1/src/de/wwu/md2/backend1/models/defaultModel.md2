@@ -1,0 +1,11 @@
+package de.wwu.md2.backend1.models
+
+/*
+ * Implement the model here
+ */
+entity Person {
+	name : string
+	dateOfBirth : date
+	father : Person(optional)
+	mother : Person(optional)
+}

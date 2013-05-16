@@ -1,0 +1,9 @@
+package de.wwu.md2.simple.models
+
+/*
+ * Implement the model here
+ */
+entity TestEntity {
+    testString : string
+    testDate : date
+}

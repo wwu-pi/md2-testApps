@@ -1,0 +1,21 @@
+package de.wwu.md2.simple.controllers
+
+/*
+ * Implement the controller here
+ */
+main {
+    appName "Simple App"
+    appVersion "0.1"
+    modelVersion "0.1"
+    startView SimpleView
+    onInitialized init
+}
+
+contentProvider TestEntity localTestStore {
+    providerType local
+}
+
+action CustomAction init {
+    bind action DataAction(load localTestStore) on SimpleView.loadBtn.onTouch
+    bind action DataAction(save localTestStore) on SimpleView.saveBtn.onTouch
+}

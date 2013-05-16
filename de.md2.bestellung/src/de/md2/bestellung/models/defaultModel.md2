@@ -1,0 +1,12 @@
+package de.md2.bestellung.models
+
+entity Produkt {
+	name : string
+	preis : integer
+	beschreibung : string(optional)
+}
+
+entity Bestellung {
+	produkt : Produkt
+	email : string
+}

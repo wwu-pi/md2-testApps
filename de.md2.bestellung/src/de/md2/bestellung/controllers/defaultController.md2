@@ -1,0 +1,42 @@
+package de.md2.bestellung.controllers
+
+main {
+	appName "Bestellapp"
+	appVersion "ATPS 2013"
+	startView AppFenster.Suchen
+	modelVersion "1.0"
+	onInitialized init
+}
+
+action CombinedAction init {
+	actions ereignisseRegistrieren validatorenBinden
+}
+
+action CustomAction ereignisseRegistrieren {
+	bind action produktLaden on SuchenTab.sucheBtn.onTouch
+	bind action bestellungAufgeben on BestellenTab.bestellenBtn.onTouch
+}
+
+action CustomAction validatorenBinden {
+	bind validator RegExValidator(regEx "[a-z]+@[a-z]+\\.[a-z]+") 
+		on BestellenTab.bestellung[Bestellung.email]
+}
+
+action CustomAction produktLaden {
+	call DataAction(load suchergebnis)
+	call NewObjectAction(bestellungProvider)
+	call AssignObjectAction(use suchergebnis for bestellungProvider.produkt)
+	call GotoViewAction(AppFenster.Bestellen)
+}
+
+action CustomAction bestellungAufgeben {
+	call DataAction(save bestellungProvider)
+}
+
+contentProvider Produkt suchergebnis {
+	providerType backend
+	filter first where Produkt.^name equals AppFenster.Suchen->SuchenTab.suchFeld
+}
+contentProvider Bestellung bestellungProvider {providerType backend }
+
+remoteConnection backend { uri "http://wipc062.uni-muenster.de:8080/de.md2.bestellung.backend/service" }

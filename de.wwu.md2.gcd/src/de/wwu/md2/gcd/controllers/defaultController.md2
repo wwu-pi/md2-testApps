@@ -1,0 +1,27 @@
+package de.wwu.md2.gcd.controllers
+
+main {
+    appName "GreatestCommonDivisor"
+    appVersion "0.1"
+    modelVersion "0.1"
+    onInitialized init
+    startView mainView
+}
+
+contentProvider GcdTask localStore {
+    providerType local
+}
+
+action CustomAction init {
+    map mainView.fldA to localStore.a
+    map mainView.fldB to localStore.b
+    
+    bind action calculate on mainView.calcBtn.onTouch
+    bind action reset on mainView.resetBtn.onTouch
+}
+
+action CustomAction calculate {}
+
+action CustomAction reset {
+    call NewObjectAction(localStore)
+}

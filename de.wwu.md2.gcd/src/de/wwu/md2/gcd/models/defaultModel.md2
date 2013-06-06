@@ -1,0 +1,6 @@
+package de.wwu.md2.gcd.models
+
+entity GcdTask {
+    a : integer
+    b : integer
+}

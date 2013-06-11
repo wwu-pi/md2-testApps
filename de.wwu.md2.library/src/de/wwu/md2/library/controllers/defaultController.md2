@@ -19,6 +19,8 @@ action CombinedAction init {
 action CustomAction bindEvents {
 	bind action loadBook on MainView.ctrlPane.loadBookBtn.onTouch
 	bind action reset on MainView.ctrlPane.resetBtn.onTouch
+	bind action createBook on MainView.ctrlPane.createBtn.onTouch
+	
 	bind action sendLoanRequest on MainView.loanBtn.onTouch
 }
 
@@ -35,6 +37,10 @@ action CustomAction loadBook {
 
 action CustomAction reset {
     call NewObjectAction(bookProvider)
+}
+
+action CustomAction createBook {
+    call DataAction(save bookProvider)
 }
 
 action CustomAction sendLoanRequest {

@@ -16,6 +16,7 @@ FlowLayoutPane MainView(vertical) {
 	FlowLayoutPane ctrlPane (horizontal) {
 	   Button loadBookBtn ("Load book from ISBN")
 	   Button resetBtn ("Reset")
+	   Button createBtn ("Enter new book")
 	}
 	
 	Label loanHeader {

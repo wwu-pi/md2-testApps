@@ -24,7 +24,7 @@ action CustomAction bindEvents {
 action CustomAction mapFields {
 	map MainView.loanEMail to loanProvider.email
 	// regex simplified and wrong
-	bind validator RegExValidator(regEx "[a-z]+@[a-z]+\\.[a-z]+") on MainView.loanEMail
+	bind validator RegExValidator(regEx ".+@.+\\.[a-z]+") on MainView.loanEMail
 }
 
 action CustomAction loadBook {

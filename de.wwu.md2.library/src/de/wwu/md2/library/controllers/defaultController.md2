@@ -17,7 +17,8 @@ action CombinedAction init {
 }
 
 action CustomAction bindEvents {
-	bind action loadBook on MainView.loadBookBtn.onTouch
+	bind action loadBook on MainView.ctrlPane.loadBookBtn.onTouch
+	bind action reset on MainView.ctrlPane.resetBtn.onTouch
 	bind action sendLoanRequest on MainView.loanBtn.onTouch
 }
 
@@ -30,6 +31,10 @@ action CustomAction mapFields {
 action CustomAction loadBook {
 	call DataAction(load bookProvider)
 	call NewObjectAction(loanProvider)
+}
+
+action CustomAction reset {
+    call NewObjectAction(bookProvider)
 }
 
 action CustomAction sendLoanRequest {

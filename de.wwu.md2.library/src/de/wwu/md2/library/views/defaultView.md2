@@ -13,7 +13,10 @@ FlowLayoutPane MainView(vertical) {
 		contentProvider bookProvider
 	}
 	
-	Button loadBookBtn ("Load book from ISBN")
+	FlowLayoutPane ctrlPane (horizontal) {
+	   Button loadBookBtn ("Load book from ISBN")
+	   Button resetBtn ("Reset")
+	}
 	
 	Label loanHeader {
 		text "Request Loan"

@@ -1,8 +1,8 @@
 package de.wwu.md2.gcd.views
 
 GridLayoutPane mainView (columns 2) {
-    TextInput fldA { label "First integer number" }
-    TextInput fldB { label "Second integer number" }
+    TextInput fldA { label "First natural number" }
+    TextInput fldB { label "Second natural number" }
     
     Button calcBtn("Calculate gcd")
     Button resetBtn("Reset")

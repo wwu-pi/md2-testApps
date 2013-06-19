@@ -16,6 +16,8 @@ action CustomAction init {
     map mainView.fldA to localStore.a
     map mainView.fldB to localStore.b
     
+    bind validator NumberRangeValidator(min 1.0, message "Please enter a natural number (greater than zero).") on mainView.fldA mainView.fldB
+    
     bind action calculate on mainView.calcBtn.onTouch
     bind action reset on mainView.resetBtn.onTouch
 }

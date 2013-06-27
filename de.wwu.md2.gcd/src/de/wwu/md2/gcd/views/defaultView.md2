@@ -6,5 +6,8 @@ GridLayoutPane mainView (columns 2) {
     
     Button calcBtn("Calculate gcd")
     Button resetBtn("Reset")
+    
+    Label resultTextLbl("Result")
+    Label resultLbl("")
 }
     

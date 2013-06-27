@@ -8,13 +8,17 @@ main {
     startView mainView
 }
 
-contentProvider GcdTask localStore {
+contentProvider GcdTask userInput {
+    providerType local
+}
+
+contentProvider GcdTask calcStore {
     providerType local
 }
 
 action CustomAction init {
-    map mainView.fldA to localStore.a
-    map mainView.fldB to localStore.b
+    map mainView.fldA to userInput.a
+    map mainView.fldB to userInput.b
     
     bind validator NumberRangeValidator(min 1.0, message "Please enter a natural number (greater than zero).") on mainView.fldA mainView.fldB
     
@@ -22,8 +26,20 @@ action CustomAction init {
     bind action reset on mainView.resetBtn.onTouch
 }
 
-action CustomAction calculate {}
+action CustomAction calculate {
+//    call AssignObjectAction(use userInput for calcStore)
+//    call gcdEuclid
+    map mainView.resultLbl to calcStore.a
+}
+
+//action CustomAction gcdEuclid[not calcStore.b equals 0] {
+//    call AssignValueAction((calcStore.a mod calcStore.b) to calcStore.tmp)
+//    call AssignValueAction(calcStore.b to calcStore.a)
+//    call AssignValueAction(calcStore.tmp to calcStore.b)
+//    
+//    call gcdEuclid
+//}
 
 action CustomAction reset {
-    call NewObjectAction(localStore)
+    call NewObjectAction(userInput)
 }

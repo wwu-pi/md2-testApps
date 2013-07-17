@@ -7,3 +7,11 @@ entity TestEntity {
     testString : string
     testDate : date
 }
+entity Test2 {
+    name : string
+    gender: Gender
+    test_entity : TestEntity
+}
+enum Gender {
+    "female", "male"
+}

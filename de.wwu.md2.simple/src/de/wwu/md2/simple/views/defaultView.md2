@@ -4,9 +4,26 @@ package de.wwu.md2.simple.views
  * Implement the view here
  */
 FlowLayoutPane SimpleView(vertical) {
-    AutoGenerator testEntityGen {
-        contentProvider localTestStore
-    }
-    Button loadBtn("Load")
-    Button saveBtn("Save")
+   Label test ("Die Einschläge von <i>Meteoriten</i> prägen seit Milliarden von Jahren die Oberflächen von Planeten, Monden, Asteroiden und Kometen im Sonnensystem. Wie Meteoriten-Krater genau entstehen, untersucht die MEMIN- Forschergruppe als eine der weltweit führenden Einrichtungen auf diesem Gebiet. Der Verbund, zu dem auch Prof. Dr. Alexander Deutsch vom Institut für Planetologie der Universität Münster mit seiner Arbeitsgruppe gehört, wird seit drei Jahren von der Deutschen Forschungsgemeinschaft (DFG) gefördert. Nun hat die DFG für drei weitere Jahre Fördermittel in Höhe von 1,6 Millionen Euro bewilligt. Hiervon profitieren neben den Münsteranern die federführende Universität Freiburg, die Universitäten in Jena und München, das Fraunhofer-Institut für Kurzzeitdynamik in Freiburg, Forschungseinrichtungen in Berlin und Hamburg sowie Kooperationspartner in Beauvais (Frankreich) und Stony Brook (USA). Die Abkürzung MEMIN steht für Multidisciplinary Experimental and Modeling Impact Research Network.")
+   Button loadBtn("Load")
+   Button saveBtn("Save"){}
+   Label tets2{
+       style {
+           textStyle italic
+           
+       }
+       text ""
+   }
+   TextInput inputFld {type timestamp}
+       AutoGenerator auto1{ contentProvider localTestStore }
+}
+GridLayoutPane ViewName(columns 2) {}
+
+TabbedPane TabView {
+    ViewName->View
+    SimpleView->Simple
+    FlowLayoutPane Test {}
+}
+style HeaderStyle {
+    
 }

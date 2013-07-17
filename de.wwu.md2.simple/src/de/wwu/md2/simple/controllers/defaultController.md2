@@ -11,11 +11,17 @@ main {
     onInitialized init
 }
 
+remoteConnection testServer {
+    uri ""
+}
 contentProvider TestEntity localTestStore {
-    providerType local
+    providerType testServer
+    filter first
 }
 
 action CustomAction init {
     bind action DataAction(load localTestStore) on SimpleView.loadBtn.onTouch
     bind action DataAction(save localTestStore) on SimpleView.saveBtn.onTouch
+    map SimpleView.inputFld to localTestStore.testString
+    bind validator RegExValidator(regEx ".*") on SimpleView.inputFld
 }

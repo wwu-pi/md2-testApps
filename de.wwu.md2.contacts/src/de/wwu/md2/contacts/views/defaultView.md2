@@ -2,7 +2,10 @@ package de.wwu.md2.contacts.views
 
 FlowLayoutPane MainWindow {
     ContactListView -> LeftPane
-    ContactDetailView -> RightPane
+//    atomic {
+        ContactDetailView -> RightPane
+        FlowLayoutPane test {}
+//    }
 }
 
 FlowLayoutPane ContactListView(vertical) {

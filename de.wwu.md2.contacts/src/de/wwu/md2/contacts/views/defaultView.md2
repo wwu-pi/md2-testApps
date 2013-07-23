@@ -1,0 +1,28 @@
+package de.wwu.md2.contacts.views
+
+FlowLayoutPane MainWindow {
+    ContactListView -> LeftPane
+    ContactDetailView -> RightPane
+}
+
+FlowLayoutPane ContactListView(vertical) {
+     EntitySelector contactsList {
+         textProposition contactsStore.familyName
+     }
+     Button newContactBtn("Add contact")
+}
+
+FlowLayoutPane ContactDetailView(vertical) {
+    FlowLayoutPane NameRow {
+        TextInput familyNameFld{label "Family name"}
+        TextInput givenNameFld{label "Given name"}
+    }
+    
+    TextInput birthFld{label "Date of birth" type date}
+    
+    AutoGenerator phoneRow {
+        contentProvider contactsStore(only Contact.phone)
+    }
+    
+    Button saveContactBtn("Save changes")
+}

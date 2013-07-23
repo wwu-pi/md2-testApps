@@ -1,0 +1,33 @@
+package de.wwu.md2.contacts.controllers
+
+main {
+    appName "Contacts demo"
+    appVersion "1.0"
+    startView MainWindow
+    modelVersion "1.0"
+    onInitialized init
+}
+
+remoteConnection server {
+    uri "http://wipc062.uni-muenster.de:8080/de.wwu.md2.contacts.backend/service"
+}
+contentProvider Contact[] contactsStore {
+    providerType server
+}
+
+action CustomAction init {
+    map ContactDetailView.NameRow.familyNameFld to contactsStore.familyName
+    map ContactDetailView.NameRow.givenNameFld to contactsStore.givenName
+    map ContactDetailView.birthFld to contactsStore.dateOfBirth
+    
+    bind action newContact on ContactListView.newContactBtn.onTouch
+    bind action saveContact on ContactDetailView.saveContactBtn.onTouch
+    
+    call DataAction(load contactsStore)
+}
+action CustomAction newContact {
+    call NewObjectAction(contactsStore)
+}
+action CustomAction saveContact {
+    call DataAction(save contactsStore)
+}

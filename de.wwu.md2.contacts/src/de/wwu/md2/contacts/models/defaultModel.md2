@@ -1,0 +1,22 @@
+package de.wwu.md2.contacts.models
+
+entity Contact {
+    familyName : string
+    givenName : string(optional)
+    phone : Phone
+    dateOfBirth : date(optional)
+}
+
+entity Phone {
+    number : string
+    // oder
+//    countryCode : integer
+//    areaCode : integer
+//    subscriber : integer
+    
+    kind : PhoneKind
+}
+
+enum PhoneKind {
+    "Mobile", "Home", "Work"
+}

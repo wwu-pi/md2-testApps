@@ -16,9 +16,8 @@ contentProvider Contact[] contactsStore {
 }
 
 action CustomAction init {
-    map ContactDetailView.NameRow.familyNameFld to contactsStore.familyName
-    map ContactDetailView.NameRow.givenNameFld to contactsStore.givenName
-    map ContactDetailView.birthFld to contactsStore.dateOfBirth
+    map ContactDetailView.nameFld to contactsStore.^name
+    map ContactDetailView.phoneFld to contactsStore.phone.^number
     
     bind action newContact on ContactListView.newContactBtn.onTouch
     bind action saveContact on ContactDetailView.saveContactBtn.onTouch

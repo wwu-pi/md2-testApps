@@ -1,11 +1,20 @@
 package de.wwu.md2.contacts.views
 
 FlowLayoutPane MainWindow {
-    ContactListView -> LeftPane
-//    atomic {
-        ContactDetailView -> RightPane
-        FlowLayoutPane test {}
-//    }
+    FlowLayoutPane ContactListView(vertical) {
+        EntitySelector contactsList {
+            textProposition contactsStore.familyName
+        }
+        Button newContactBtn("Add contact")
+    }
+    FlowLayoutPane DetailView(vertical) {
+//        atomic {
+            TextInput familyNameFld{label "Family name"}
+            TextInput givenNameFld{label "Given name"}
+//        }
+        TextInput phoneFld{label "Phone"}
+        Button saveBtn("Save")
+    }
 }
 
 FlowLayoutPane ContactListView(vertical) {

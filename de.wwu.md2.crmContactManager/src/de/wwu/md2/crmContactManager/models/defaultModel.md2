@@ -1,0 +1,19 @@
+package de.wwu.md2.crmContactManager.models
+
+  entity Contact {
+    firstname : string
+    surname : string
+    phone : integer (optional)
+    email : string (optional)
+    address : string (optional)
+    state : AcquisitionState
+    interactions : Interaction
+  }
+  enum AcquisitionState {
+    "Prospective", "Acquiring",
+      "Acquired", "Rejected"
+  }
+  entity Interaction {
+  	interactiondate : date
+  	occasion : string
+  }

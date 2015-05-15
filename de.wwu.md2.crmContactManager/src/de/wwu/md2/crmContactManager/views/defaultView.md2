@@ -1,0 +1,13 @@
+package de.wwu.md2.crmContactManager.views
+
+FlowLayoutPane addContactView (vertical) {
+  AutoGenerator autoGenerator {
+    contentProvider contactContentProvider
+  }
+  List interactionsList {
+  	itemtype Interaction
+  	itemtext Interaction.^occasion
+  	listtype plain
+  }
+  Button addButton ("Add")
+}

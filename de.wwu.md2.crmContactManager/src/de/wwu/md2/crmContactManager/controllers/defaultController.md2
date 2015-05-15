@@ -1,0 +1,25 @@
+package de.wwu.md2.crmContactManager.controllers
+
+main {
+  appName "CRM contact manager"
+  appVersion "1.0"
+  modelVersion "1.0"
+  startView addContactView
+  onInitialized startUpAction
+}
+
+contentProvider Contact contactContentProvider {
+  providerType crmSystem
+}
+
+remoteConnection crmSystem {
+  uri "http://md2.crm.corp.com/"
+}
+
+action CustomAction startUpAction {
+  bind action addAction on addContactView.addButton.onTouch
+}
+
+action CustomAction addAction {
+  call DataAction (save contactContentProvider)
+}

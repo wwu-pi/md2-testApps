@@ -2,7 +2,7 @@ package de.wwu.md2.crmContactManager.views
 
 FlowLayoutPane addContactView (vertical) {
   AutoGenerator autoGenerator {
-    contentProvider contactContentProvider
+    contentProvider contactContentProvider (exclude Contact.interactions)
   }
   List interactionsList {
   	itemtype Interaction

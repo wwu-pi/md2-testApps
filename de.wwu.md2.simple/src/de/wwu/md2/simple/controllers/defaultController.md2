@@ -4,18 +4,34 @@ package de.wwu.md2.simple.controllers
  * Implement the controller here
  */
 main {
-    appName "Simple App"
     appVersion "0.1"
     modelVersion "0.1"
-    startView SimpleView
-    onInitialized init
+    workflowManager dummy
+}
+
+remoteConnection dummy {
+	uri "http://dummy/path"
 }
 
 contentProvider TestEntity localTestStore {
     providerType local
 }
 
-action CustomAction init {
-    bind action DataAction(load localTestStore) on SimpleView.loadBtn.onTouch
-    bind action DataAction(save localTestStore) on SimpleView.saveBtn.onTouch
+WorkflowElement simpleWfe {
+	defaultProcessChain simpleProcessChain
+	
+	onInit {
+		init
+	}
+	
+	processChain simpleProcessChain {
+		step startChain:
+			view SimpleView
+	}
+		
+	action CustomAction init {
+	    bind action ContentProviderOperation(load: localTestStore) on SimpleView.loadBtn.onClick
+	    bind action ContentProviderOperation(save: localTestStore) on SimpleView.saveBtn.onClick
+	    bind action FireEvent(endWorkflowEvent) on SimpleView.saveBtn.onClick
+	}
 }

@@ -1,0 +1,17 @@
+package de.wwu.md2.simple.workflows
+
+/*
+ * Implement the workflow here
+ */
+WorkflowElement simpleWfe fires endWorkflowEvent {
+	end workflow
+}
+
+App simpleApp {
+	WorkflowElements {
+		simpleWfe(startable: "Start simple workflow")
+	}
+	
+	appName "Simple App"
+	defaultConnection dummy
+}

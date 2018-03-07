@@ -3,10 +3,11 @@ package de.wwu.md2.simple.views
 /*
  * Implement the view here
  */
-FlowLayoutPane SimpleView(vertical) {
+View SimpleView {
     AutoGenerator testEntityGen {
-        contentProvider localTestStore
+        contentProvider: localTestStore
     }
+    
     Button loadBtn("Load")
     Button saveBtn("Save")
 }

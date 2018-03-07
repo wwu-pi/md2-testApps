@@ -5,7 +5,7 @@ package de.wwu.md2.simple.controllers
  */
 main {
     appVersion "0.1"
-    modelVersion "0.1"
+    modelVersion "1"
     workflowManager dummy
 }
 
@@ -30,8 +30,8 @@ WorkflowElement simpleWfe {
 	}
 		
 	action CustomAction init {
-	    bind action ContentProviderOperation(load: localTestStore) on SimpleView.loadBtn.onClick
-	    bind action ContentProviderOperation(save: localTestStore) on SimpleView.saveBtn.onClick
+	    bind action ContentProviderOperation(load :localTestStore) on SimpleView.loadBtn.onClick
+	    bind action ContentProviderOperation(save :localTestStore) on SimpleView.saveBtn.onClick
 	    bind action FireEvent(endWorkflowEvent) on SimpleView.saveBtn.onClick
 	}
 }

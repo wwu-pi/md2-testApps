@@ -5,7 +5,7 @@ package de.wwu.md2.simple.views
  */
 View SimpleView {
     AutoGenerator testEntityGen {
-        contentProvider: localTestStore
+        contentProvider :localTestStore
     }
     
     Button loadBtn("Load")

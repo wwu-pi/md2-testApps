@@ -1,7 +1,7 @@
 package de.md2.bestellung.models
 
 entity Produkt {
-	name : string
+	produktname : string
 	preis : integer
 	beschreibung : string(optional)
 }

@@ -1,10 +1,6 @@
 package de.md2.bestellung.views
-TabbedPane AppFenster {
-	SuchenTab -> Suchen
-	BestellenTab -> Bestellen(tabTitle "Bestellung")
-	InfoTab(tabTitle "Info")
-}
-FlowLayoutPane SuchenTab(vertical) {
+
+View Suchen {
 	Label sucheLbl {
 		text "Suche nach Produkt"
 		style Gross
@@ -15,7 +11,8 @@ FlowLayoutPane SuchenTab(vertical) {
 	}
 	Button sucheBtn ("Suchen")
 }
-FlowLayoutPane BestellenTab(vertical) {
+
+View Bestellen {
 	Label bestellenLbl {
 		text "Bestellung aufgeben"
 		style Gross
@@ -24,12 +21,10 @@ FlowLayoutPane BestellenTab(vertical) {
 	Label info2("um dieses Produkt zu bestellen.")
 	
 	AutoGenerator bestellung {
-		contentProvider bestellungProvider
+		contentProvider :bestellungProvider
 	}
 	
 	Button bestellenBtn ("Bestellen")
 }
-FlowLayoutPane InfoTab {
-	Label info("Informationen ...")
-}
-style Gross { fontSize 20 textStyle bold }
+
+style Gross { fontSize 20.0 textStyle bold }

@@ -1,0 +1,16 @@
+package de.md2.bestellung.workflows
+
+/*
+ * Implement the workflow here
+ */
+WorkflowElement bestellungWfe fires endWorkflowEvent {
+	end workflow
+}
+
+App bestellApp {
+	WorkflowElements {
+		bestellungWfe(startable: "Bestellung beginnen")
+	}
+	
+	appName "Bestellapp"
+}

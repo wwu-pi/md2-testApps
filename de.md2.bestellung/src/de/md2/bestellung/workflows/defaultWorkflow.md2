@@ -3,7 +3,7 @@ package de.md2.bestellung.workflows
 /*
  * Implement the workflow here
  */
-WorkflowElement bestellungWfe fires endWorkflowEvent {
+WorkflowElement bestellungWfe fires bestellungVollstaendig {
 	end workflow
 }
 
@@ -12,5 +12,5 @@ App bestellApp {
 		bestellungWfe(startable: "Bestellung beginnen")
 	}
 	
-	appName "Bestellapp"
+	appName "BestellApp"
 }

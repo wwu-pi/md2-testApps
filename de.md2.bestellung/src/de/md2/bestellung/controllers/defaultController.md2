@@ -10,17 +10,15 @@ WorkflowElement bestellungWfe {
 	defaultProcessChain defaultChain
 	
 	onInit {
-		init
+		ereignisseRegistrieren,
+		validatorenBinden
 	}
 	
 	processChain defaultChain {
-		step startView:
+		step produktSuchen:
 			view Suchen
-	}
-	
-	action CombinedAction init {
-		ereignisseRegistrieren
-		validatorenBinden
+		step produktBestellen:
+			view Bestellen 
 	}
 	
 	action CustomAction ereignisseRegistrieren {
@@ -35,16 +33,15 @@ WorkflowElement bestellungWfe {
 	
 	action CustomAction produktLaden {
 		call ContentProviderOperation(load :suchergebnis)
-		// New object
-		call ContentProviderResetLocal(:bestellungProvider)
+		call ContentProviderReset (:bestellungProvider)
 		set :bestellungProvider.produkt = :suchergebnis
 		
-		call GotoView(Bestellen)
+		call GotoView (Bestellen)
 	}
 	
 	action CustomAction bestellungAufgeben {
 		call ContentProviderOperation(save :bestellungProvider)
-		call FireEvent (endWorkflowEvent)
+		call FireEvent (bestellungVollstaendig)
 	}	
 }
 

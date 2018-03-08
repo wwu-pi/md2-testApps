@@ -5,10 +5,12 @@ View Suchen {
 		text "Suche nach Produkt"
 		style Gross
 	}
+	
 	TextInput suchFeld {
 		label "Produktname"
 		tooltip "Geben Sie den Namen des Produkts ein, nach dem gesucht werden soll."
 	}
+	
 	Button sucheBtn ("Suchen")
 }
 
@@ -17,14 +19,17 @@ View Bestellen {
 		text "Bestellung aufgeben"
 		style Gross
 	}
-	Label info1("Bitte geben Sie Ihre E-Mail-Adresse an,")
-	Label info2("um dieses Produkt zu bestellen.")
+	
+	Label info("Bitte geben Sie Ihre E-Mail-Adresse an, um dieses Produkt zu bestellen.")
 	
 	AutoGenerator bestellung {
 		contentProvider :bestellungProvider
 	}
 	
-	Button bestellenBtn ("Bestellen")
+	Button bestellenBtn ("Jetzt bestellen")
 }
 
-style Gross { fontSize 20.0 textStyle bold }
+style Gross { 
+	fontSize 20.0 
+	textStyle bold
+}

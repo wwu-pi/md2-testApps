@@ -1,0 +1,16 @@
+package de.md2.library.workflows
+
+/*
+ * Implement the workflow here
+ */
+WorkflowElement LibraryWfe fires endWorkflowEvent {
+	end workflow
+}
+
+App bestellApp {
+	WorkflowElements {
+		LibraryWfe(startable: "Library")
+	}
+	
+	appName "Library Application"
+}

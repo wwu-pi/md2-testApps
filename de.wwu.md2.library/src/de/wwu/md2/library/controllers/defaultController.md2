@@ -4,59 +4,70 @@ package de.wwu.md2.library.controllers
  * Implement the controller here
  */
 main {
-	appName "Library Application"
 	appVersion "0.1"
-	modelVersion "0.1"
-	startView TabbedView.Main
-	onInitialized init
+	modelVersion "1"
 	defaultConnection wipc062
+	workflowManager wipc062
 }
 
-action CombinedAction init {
-	actions bindEvents mapFields
-}
-
-action CustomAction bindEvents {
-	bind action loadBook on MainView.ctrlPane.loadBookBtn.onTouch
-	bind action reset on MainView.ctrlPane.resetBtn.onTouch
-	bind action createBook on MainView.ctrlPane.createBtn.onTouch
-	
-	bind action sendLoanRequest on MainView.loanBtn.onTouch
-}
-
-action CustomAction mapFields {
-	map MainView.loanEMail to loanProvider.email
-	// regex simplified and wrong
-	bind validator RegExValidator(regEx ".+@.+\\.[a-z]+") on MainView.loanEMail
-}
-
-action CustomAction loadBook {
-	call DataAction(load bookProvider)
-	call NewObjectAction(loanProvider)
-}
-
-action CustomAction reset {
-    call NewObjectAction(bookProvider)
-}
-
-action CustomAction createBook {
-    call DataAction(save bookProvider)
-}
-
-action CustomAction sendLoanRequest {
-	call AssignObjectAction(use bookProvider for loanProvider.bookRequested)
-	call DataAction(save loanProvider)
+remoteConnection wipc062 {
+	uri "http://wipc062.uni-muenster.de:8080/de.wwu.md2.library.backend/service"
 }
 
 contentProvider Book bookProvider {
 	providerType default
-	filter first where Book.isbn equals TabbedView.Main->MainView.bookInfoPart[Book.isbn]
+	filter first where Book.isbn equals MainView.bookInfoPart[Book.isbn]
 }
 
 contentProvider LoanRequest loanProvider {
 	providerType default
 }
 
-remoteConnection wipc062 {
-	uri "http://wipc062.uni-muenster.de:8080/de.wwu.md2.library.backend/service"
+WorkflowElement LibraryWfe {
+	defaultProcessChain defaultChain
+	
+	onInit {
+		bindEvents,
+		mapFields
+	}
+	
+	processChain defaultChain {
+		step startChain:
+			view MainView
+	}
+	
+	action CustomAction bindEvents {
+		bind action loadBook on MainView.ctrlPane.loadBookBtn.onClick
+		bind action reset on MainView.ctrlPane.resetBtn.onClick
+		bind action createBook on MainView.ctrlPane.createBtn.onClick
+		
+		bind action sendLoanRequest on MainView.loanBtn.onClick
+	}
+	
+	action CustomAction mapFields {
+		map MainView.loanEMail to :loanProvider.email
+		// regex simplified and wrong
+		bind validator RegExValidator(regEx ".+@.+\\.[a-z]+") on MainView.loanEMail
+	}
+	
+	action CustomAction loadBook {
+		call ContentProviderOperation(load :bookProvider)
+		// New Object
+		call ContentProviderReset(:loanProvider)
+	}
+	
+	action CustomAction reset {
+	    // New Object
+		call ContentProviderReset(:bookProvider)
+	}
+	
+	action CustomAction createBook {
+	    call ContentProviderOperation(save :bookProvider)
+	    call FireEvent(endWorkflowEvent)
+	}
+	
+	action CustomAction sendLoanRequest {
+		//call AssignObjectAction(use bookProvider for loanProvider.bookRequested)
+		call ContentProviderOperation(save :loanProvider)
+	}
 }

@@ -3,14 +3,14 @@ package de.wwu.md2.library.views
 /*
  * Implement the view here
  */
-FlowLayoutPane MainView(vertical) {
+View MainView {
 	Label bookHeader {
 		text "Book"
 		style HeaderStyle
 	}
 	
 	AutoGenerator bookInfoPart {
-		contentProvider bookProvider
+		contentProvider :bookProvider
 	}
 	
 	FlowLayoutPane ctrlPane (horizontal) {
@@ -32,16 +32,7 @@ FlowLayoutPane MainView(vertical) {
 	Button loanBtn ("Loan this book")
 }
 
-FlowLayoutPane InfoView(vertical) {
-	Label info("Info.")
-}
-
-TabbedPane TabbedView {
-	MainView -> Main
-	InfoView(tabTitle "Info")
-}
-
 style HeaderStyle {
-	fontSize 20
+	fontSize 20.0
 	textStyle bold
 }

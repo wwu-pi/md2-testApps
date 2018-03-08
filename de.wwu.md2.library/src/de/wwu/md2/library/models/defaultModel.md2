@@ -4,7 +4,7 @@ package de.wwu.md2.library.models
  * Implement the model here
  */
 entity Book{
-	title : string
+	booktitle : string
 	author : string(optional)
 	isbn : string {
 		name "ISBN"

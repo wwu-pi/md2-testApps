@@ -4,6 +4,8 @@ package de.wwu.md2.library.views
  * Implement the view here
  */
 View MainView {
+	title "Library functions"
+
 	Label bookHeader {
 		text "Book"
 		style HeaderStyle
@@ -15,7 +17,7 @@ View MainView {
 	
 	FlowLayoutPane ctrlPane (horizontal) {
 	   Button loadBookBtn ("Load book from ISBN")
-	   Button resetBtn ("Reset")
+	   Button resetBtn ("Reset mask")
 	   Button createBtn ("Enter new book")
 	}
 	
@@ -30,6 +32,20 @@ View MainView {
 	}
 	
 	Button loanBtn ("Loan this book")
+}
+
+View BookList {
+	title "List of books"
+	
+	Label bookHeader {
+		text "The following books are available in the library:"
+	}
+	
+	ListView bookList {
+		connectedProvider :allBooksProvider.booktitle
+	}
+	
+	Button doneBtn ("Return")
 }
 
 style HeaderStyle {

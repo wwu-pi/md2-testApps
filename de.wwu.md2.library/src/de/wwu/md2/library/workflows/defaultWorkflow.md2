@@ -7,9 +7,14 @@ WorkflowElement LibraryWfe fires endWorkflowEvent {
 	end workflow
 }
 
+WorkflowElement BooklistWfe fires endWorkflowEvent {
+	end workflow
+}
+
 App bestellApp {
 	WorkflowElements {
-		LibraryWfe(startable: "Library")
+		LibraryWfe(startable: "Library functions"),
+		BooklistWfe(startable: "Book list")
 	}
 	
 	appName "Library Application"

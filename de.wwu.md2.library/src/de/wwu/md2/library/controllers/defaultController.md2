@@ -6,7 +6,6 @@ package de.wwu.md2.library.controllers
 main {
 	appVersion "0.1"
 	modelVersion "1"
-	defaultConnection wipc062
 	workflowManager wipc062
 }
 
@@ -15,12 +14,16 @@ remoteConnection wipc062 {
 }
 
 contentProvider Book bookProvider {
-	providerType default
+	providerType local
 	filter first where Book.isbn equals MainView.bookInfoPart[Book.isbn]
 }
 
 contentProvider LoanRequest loanProvider {
-	providerType default
+	providerType local
+}
+
+contentProvider Book[] allBooksProvider {
+	providerType local
 }
 
 WorkflowElement LibraryWfe {
@@ -67,7 +70,33 @@ WorkflowElement LibraryWfe {
 	}
 	
 	action CustomAction sendLoanRequest {
-		//call AssignObjectAction(use bookProvider for loanProvider.bookRequested)
+		set :loanProvider.bookRequested = :bookProvider
 		call ContentProviderOperation(save :loanProvider)
+	}
+}
+
+WorkflowElement BooklistWfe {
+	defaultProcessChain defaultChain
+	
+	onInit {
+		bindEvents,
+		loadBooks
+	}
+	
+	action CustomAction loadBooks {
+		call ContentProviderOperation(load :allBooksProvider)
+	}
+	
+	action CustomAction bindEvents {
+		bind action returnAction on BookList.doneBtn.onClick
+	}
+	
+	action CustomAction returnAction {
+	    call FireEvent(endWorkflowEvent)
+	}
+	
+	processChain defaultChain {
+		step startChain:
+			view BookList
 	}
 }

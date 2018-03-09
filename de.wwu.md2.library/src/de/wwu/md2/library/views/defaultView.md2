@@ -18,7 +18,6 @@ View MainView {
 	FlowLayoutPane ctrlPane (horizontal) {
 	   Button loadBookBtn ("Load book from ISBN")
 	   Button resetBtn ("Reset mask")
-	   Button createBtn ("Enter new book")
 	}
 	
 	Label loanHeader {
@@ -32,6 +31,21 @@ View MainView {
 	}
 	
 	Button loanBtn ("Loan this book")
+}
+
+View CreateView {
+	title "Create book"
+
+	Label bookHeader {
+		text "Book"
+		style HeaderStyle
+	}
+	
+	AutoGenerator bookInfoPart {
+		contentProvider :bookProvider
+	}
+	
+	Button createBtn ("Enter new book")
 }
 
 View BookList {

@@ -24,9 +24,10 @@ contentProvider LoanRequest loanProvider {
 
 contentProvider Book[] allBooksProvider {
 	providerType local
+	filter all
 }
 
-WorkflowElement LibraryWfe {
+WorkflowElement LoanWfe {
 	defaultProcessChain defaultChain
 	
 	onInit {
@@ -42,8 +43,6 @@ WorkflowElement LibraryWfe {
 	action CustomAction bindEvents {
 		bind action loadBook on MainView.ctrlPane.loadBookBtn.onClick
 		bind action reset on MainView.ctrlPane.resetBtn.onClick
-		bind action createBook on MainView.ctrlPane.createBtn.onClick
-		
 		bind action sendLoanRequest on MainView.loanBtn.onClick
 	}
 	
@@ -63,15 +62,33 @@ WorkflowElement LibraryWfe {
 	    // New Object
 		call ContentProviderReset(:bookProvider)
 	}
+
+	action CustomAction sendLoanRequest {
+		set :loanProvider.bookRequested = :bookProvider
+		call ContentProviderOperation(save :loanProvider)
+		call FireEvent(endWorkflowEvent)
+	}
+}
+
+WorkflowElement CreateBookWfe {
+	defaultProcessChain defaultChain
+	
+	onInit {
+		bindEvents
+	}
+	
+	processChain defaultChain {
+		step startChain:
+			view CreateView
+	}
+	
+	action CustomAction bindEvents {
+		bind action createBook on CreateView.createBtn.onClick
+	}
 	
 	action CustomAction createBook {
 	    call ContentProviderOperation(save :bookProvider)
 	    call FireEvent(endWorkflowEvent)
-	}
-	
-	action CustomAction sendLoanRequest {
-		set :loanProvider.bookRequested = :bookProvider
-		call ContentProviderOperation(save :loanProvider)
 	}
 }
 

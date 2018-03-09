@@ -3,7 +3,11 @@ package de.md2.library.workflows
 /*
  * Implement the workflow here
  */
-WorkflowElement LibraryWfe fires endWorkflowEvent {
+WorkflowElement LoanWfe fires endWorkflowEvent {
+	end workflow
+}
+
+WorkflowElement CreateBookWfe fires endWorkflowEvent {
 	end workflow
 }
 
@@ -13,8 +17,9 @@ WorkflowElement BooklistWfe fires endWorkflowEvent {
 
 App bestellApp {
 	WorkflowElements {
-		LibraryWfe(startable: "Library functions"),
-		BooklistWfe(startable: "Book list")
+		CreateBookWfe(startable: "Create book"),
+		BooklistWfe(startable: "Book list"),
+		LoanWfe(startable: "Enter book loan")
 	}
 	
 	appName "Library Application"

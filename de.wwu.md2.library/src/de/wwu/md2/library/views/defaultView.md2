@@ -1,7 +1,7 @@
 package de.wwu.md2.library.views
 
 /*
- * Implement the view here
+ * The views are implemented here
  */
 View MainView {
 	title "Library functions"
@@ -33,6 +33,7 @@ View MainView {
 	Button loanBtn ("Loan this book")
 }
 
+// View to create a new book
 View CreateView {
 	title "Create book"
 
@@ -48,6 +49,7 @@ View CreateView {
 	Button createBtn ("Enter new book")
 }
 
+// Overview of existing books
 View BookList {
 	title "List of books"
 	
@@ -55,6 +57,7 @@ View BookList {
 		text "The following books are available in the library:"
 	}
 	
+	// A listView is bound to a specific contentProvider and an attribute that should be displayed 
 	ListView bookList {
 		connectedProvider :allBooksProvider.booktitle
 	}
@@ -62,6 +65,7 @@ View BookList {
 	Button doneBtn ("Return")
 }
 
+// Style declarations can be used to modify the appearance
 style HeaderStyle {
 	fontSize 20.0
 	textStyle bold

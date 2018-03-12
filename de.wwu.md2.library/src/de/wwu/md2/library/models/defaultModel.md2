@@ -1,12 +1,17 @@
 package de.wwu.md2.library.models
 
 /*
- * Implement the model here
+ * Data model for the app. The simple library model contains books and loanRequests
  */
+
 entity Book{
-	booktitle : string
+	// Shorthand notation for attributes
+	booktitle : string 
+	
 	author : string(optional)
-	isbn : string {
+	
+	// Extended notation for attributes
+	isbn : string { 
 		name "ISBN"
 		description "ISBN, only digits, without hyphens or space"
 	}

@@ -1,8 +1,14 @@
-package de.md2.library.workflows
+package de.wwu.md2.library.workflows
 
 /*
- * Implement the workflow here
+ * The workflow manages the overall app navigation.
  */
+ 
+/* 
+ Here, each workflow element only ends the current workflow 
+ because listing books, creating books, and creating loans
+ is handled in a single workflow element
+ */ 
 WorkflowElement LoanWfe fires endWorkflowEvent {
 	end workflow
 }
@@ -15,8 +21,13 @@ WorkflowElement BooklistWfe fires endWorkflowEvent {
 	end workflow
 }
 
+// The app to create. There might be multiple apps based on different user roles 
 App bestellApp {
+	
+	// Which workflow elements are contained in this app
 	WorkflowElements {
+		// Here, all workflow elements are also startable (i.e. new workflow instances
+		// can be triggered from the start screen
 		CreateBookWfe(startable: "Create book"),
 		BooklistWfe(startable: "Book list"),
 		LoanWfe(startable: "Enter book loan")

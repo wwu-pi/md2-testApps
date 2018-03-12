@@ -1,20 +1,26 @@
 package de.wwu.md2.library.controllers
 
 /*
- * Implement the controller here
+ * Main controller logic
  */
 main {
 	appVersion "0.1"
+	// Model version to be updated when the data model changes (should be integers > 0)
 	modelVersion "1"
+	// A remote connection that deals with the management of cross-role workflows
 	workflowManager wipc062
 }
 
+// Specifies a backend component
 remoteConnection wipc062 {
 	uri "http://wipc062.uni-muenster.de:8080/de.wwu.md2.library.backend/service"
 }
 
+// A content provider manages data storage/access
 contentProvider Book bookProvider {
+	// It can be either local or remote
 	providerType local
+	// An additional filter can specify which element is retrieved on load
 	filter first where Book.isbn equals MainView.bookInfoPart[Book.isbn]
 }
 
@@ -22,24 +28,29 @@ contentProvider LoanRequest loanProvider {
 	providerType local
 }
 
+// Multi-ContentProviders can store lists of elements
 contentProvider Book[] allBooksProvider {
 	providerType local
 	filter all
 }
 
 WorkflowElement LoanWfe {
+	// A default process chain needs to be given
 	defaultProcessChain defaultChain
 	
+	// Actions to be performed when the workflow element is started
 	onInit {
 		bindEvents,
 		mapFields
 	}
 	
+	// A Process chan specifies a sequence of views 
 	processChain defaultChain {
 		step startChain:
 			view MainView
 	}
 	
+	// Custom actions can contain different action such as data bindings or click listeners
 	action CustomAction bindEvents {
 		bind action loadBook on MainView.ctrlPane.loadBookBtn.onClick
 		bind action reset on MainView.ctrlPane.resetBtn.onClick
@@ -48,22 +59,21 @@ WorkflowElement LoanWfe {
 	
 	action CustomAction mapFields {
 		map MainView.loanEMail to :loanProvider.email
-		// regex simplified and wrong
+		// regex simplified and not accurate
 		bind validator RegExValidator(regEx ".+@.+\\.[a-z]+") on MainView.loanEMail
 	}
 	
 	action CustomAction loadBook {
 		call ContentProviderOperation(load :bookProvider)
-		// New Object
-		call ContentProviderReset(:loanProvider)
 	}
 	
 	action CustomAction reset {
-	    // New Object
+	    // Create new object in the content provider
 		call ContentProviderReset(:bookProvider)
 	}
 
 	action CustomAction sendLoanRequest {
+		// Assign the current book to the request
 		set :loanProvider.bookRequested = :bookProvider
 		call ContentProviderOperation(save :loanProvider)
 		call FireEvent(endWorkflowEvent)

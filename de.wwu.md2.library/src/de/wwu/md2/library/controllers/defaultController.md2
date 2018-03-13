@@ -20,6 +20,10 @@ remoteConnection wipc062 {
 contentProvider Book bookProvider {
 	// It can be either local or remote
 	providerType local
+}
+
+contentProvider Book bookRetrievalProvider {
+	providerType local
 	// An additional filter can specify which element is retrieved on load
 	filter first where Book.isbn equals MainView.bookInfoPart[Book.isbn]
 }
@@ -64,17 +68,17 @@ WorkflowElement LoanWfe {
 	}
 	
 	action CustomAction loadBook {
-		call ContentProviderOperation(load :bookProvider)
+		call ContentProviderOperation(load :bookRetrievalProvider)
 	}
 	
 	action CustomAction reset {
 	    // Create new object in the content provider
-		call ContentProviderReset(:bookProvider)
+		call ContentProviderReset(:bookRetrievalProvider)
 	}
 
 	action CustomAction sendLoanRequest {
 		// Assign the current book to the request
-		set :loanProvider.bookRequested = :bookProvider
+		set :loanProvider.bookRequested = :bookRetrievalProvider
 		call ContentProviderOperation(save :loanProvider)
 		call FireEvent(endWorkflowEvent)
 	}
@@ -98,6 +102,7 @@ WorkflowElement CreateBookWfe {
 	
 	action CustomAction createBook {
 	    call ContentProviderOperation(save :bookProvider)
+	    call ContentProviderReset(:bookProvider)
 	    call FireEvent(endWorkflowEvent)
 	}
 }

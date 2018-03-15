@@ -8,6 +8,7 @@ View SimpleView {
         contentProvider :localTestStore
     }
     
-    Button loadBtn("Load")
-    Button saveBtn("Save")
+    Button incBtn("Increment")
+    Button decBtn("Decrement")
+    Button returnBtn("Return")
 }

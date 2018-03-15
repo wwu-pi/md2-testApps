@@ -30,8 +30,22 @@ WorkflowElement simpleWfe {
 	}
 		
 	action CustomAction init {
-	    bind action ContentProviderOperation(load :localTestStore) on SimpleView.loadBtn.onClick
-	    bind action ContentProviderOperation(save :localTestStore) on SimpleView.saveBtn.onClick
-	    bind action FireEvent(endWorkflowEvent) on SimpleView.saveBtn.onClick
+		bind action increment on SimpleView.incBtn.onClick
+		bind action decrement on SimpleView.decBtn.onClick
+		
+		set SimpleView.testEntityGen[TestEntity.testInt] = 0
+		call ContentProviderOperation(save :localTestStore)
+	    
+	    bind action FireEvent(endWorkflowEvent) on SimpleView.returnBtn.onClick
+	}
+	
+	action CustomAction increment {
+		set :localTestStore.testInt = :localTestStore.testInt + 1
+		call ContentProviderOperation(save :localTestStore)
+	}
+	
+	action CustomAction decrement {
+		set :localTestStore.testInt = :localTestStore.testInt - 1
+		call ContentProviderOperation(save :localTestStore)
 	}
 }

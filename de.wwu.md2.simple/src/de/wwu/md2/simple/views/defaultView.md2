@@ -4,6 +4,8 @@ package de.wwu.md2.simple.views
  * Implement the view here
  */
 View SimpleView {
+	title "SimpleView"
+	
     AutoGenerator testEntityGen {
         contentProvider :localTestStore
     }

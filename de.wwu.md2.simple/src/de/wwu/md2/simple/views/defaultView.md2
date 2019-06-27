@@ -10,7 +10,7 @@ View SimpleView {
         contentProvider :localTestStore
     }
     
-    Button incBtn("Increment")
-    Button decBtn("Decrement")
-    Button returnBtn("Return")
+    Button incBtn { text "Increment" }
+    Button decBtn { text "Decrement" }
+    Button returnBtn { text "Return" }
 }

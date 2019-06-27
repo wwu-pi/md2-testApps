@@ -1,0 +1,27 @@
+package de.wwu.md2.floodApp.workflows
+
+/*
+ * Implement the workflow here
+ */
+ 
+WorkflowElement addIncidentWFE
+	fires BasicEvent {
+		end workflow
+	}
+	
+WorkflowElement seeIncidentsWFE
+	fires BasicEvent {
+		end workflow
+	}
+	
+	fires AddIncidentEvent {
+		start addIncidentWFE
+	}
+
+App FloodAppApp {
+	WorkflowElements {
+		seeIncidentsWFE (startable: "See incidents"),
+		addIncidentWFE (startable: "Share a flood event")
+	}
+	appName "FloodApp"
+}

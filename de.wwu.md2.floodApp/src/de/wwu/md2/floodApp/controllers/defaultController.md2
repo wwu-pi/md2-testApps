@@ -1,0 +1,78 @@
+package de.wwu.md2.floodApp.controllers
+
+/*
+ * Implement the controller here
+ */
+
+main {
+	appVersion "1.0"
+	modelVersion "1.0"
+	workflowManager WorkflowBackendConnection
+}
+
+remoteConnection WorkflowBackendConnection {
+	uri "http://localhost:8080/de/wwu/md2/floodApp.backend/service/"
+}
+
+WorkflowElement addIncidentWFE {
+	defaultProcessChain firstProcessChain
+	
+	onInit {
+		init
+	}
+	
+	action CustomAction init {
+		// shareView
+		bind action GotoView( streetView ) on shareView.sharingStreet.onClick
+		bind action GotoView( riverSelectionView ) on shareView.sharingRiver.onClick
+		bind action GotoView( rainView ) on shareView.sharingRain.onClick
+		bind action GotoView( photoView ) on shareView.sharingImage.onClick
+		
+		// riverSelectionView
+		bind action GotoView( riverView ) on riverSelectionView.waterStreet.onClick
+		bind action GotoView( heightView ) on riverSelectionView.waterHeight.onClick
+		bind action GotoView( colorView ) on riverSelectionView.waterColor.onClick
+		
+	}
+	
+	action CustomAction firstAction {
+		call FireEvent (BasicEvent)
+	}
+	
+	processChain  firstProcessChain {
+		step firstStep:
+			view shareView
+		step roadStep:
+			view streetView
+		step riverSelection:
+			view riverSelectionView
+	}
+}
+
+WorkflowElement seeIncidentsWFE {
+	defaultProcessChain firstProcessChain
+	
+	onInit {
+		init
+	}
+	
+	action CustomAction init {
+		// incidentsView
+		bind action addAction on incidentsView.addEvent.onClick
+		bind action leaveAction on incidentsView.backButton.onClick
+		//bind action GotoView( profileListView ) on incidentsView.showProfiles.onClick
+	}
+	
+	action CustomAction addAction {
+		call FireEvent (AddIncidentEvent)
+	}
+	
+	action CustomAction leaveAction {
+		call FireEvent (BasicEvent)
+	}
+	
+	processChain  firstProcessChain {
+		step firstStep:
+			view incidentsView
+	}
+}

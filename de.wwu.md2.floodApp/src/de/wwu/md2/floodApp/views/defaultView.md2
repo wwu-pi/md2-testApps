@@ -1,0 +1,104 @@
+package de.wwu.md2.floodApp.views
+
+/*
+ * Implement the view here
+ */
+
+//View firstView {
+//	title "Citizen observation of floods"
+//	
+//	Button see { text "See incidents" }
+//	Spacer
+//	Button share { text "Share a flood event" }
+//}
+
+View shareView {
+	title "Share an incident"
+	
+	Button sharingStreet { text "Water height in the streets" }
+	Button sharingRiver { text "Water height on the river bed" }
+	Button sharingRain { text "Intensity of rain" }
+	Button sharingImage { text "Submit an image" }
+}
+
+View streetView {
+	title "Road conditions"
+	
+	Button passable { text "Passable" }
+	Spacer ( number 2 )
+	Button notPassable { text "Not passable" }
+}
+
+View riverSelectionView {
+	title "Water height on the river bed"
+	
+	Button waterStreet { text "Height of the flood in the streets" }
+	Button waterHeight { text "Water height relative to a person" }
+	Button waterColor { text "Water color range" }
+	
+}
+
+View riverView {
+	title "Height of the flood in the streets"
+	
+	Button streetOverflowing { text "Overflowing" }
+	Button streetHigh { text "High" }
+	Button streetModerate { text "Moderate" }
+	Button streetLow { text "Low" }	
+}
+
+View heightView {
+	title "Water height relative to a person"
+	
+	Button heightMax { text "Above the head" } 
+	Button heightNeck { text "To the neck" }
+	Button heightWaist { text "To the waist" }
+	Button heightKnee { text "To the knee" }
+	Button heightAnkle { text "To the ankle" }
+}
+
+View colorView {
+	title "Water color range"
+	
+	Button colorRed { text "Red" } 
+	Button colorYellow { text "Yellow" }
+	Button colorGreen { text "Green" }
+}
+
+
+View rainView {
+	title "Weather conditions"
+	
+	Button heavyRainWind { text "Heavy rain with winds" } 
+	Button heavyRain { text "Heavy rain without winds" }
+	Button mediumRainWind { text "Medium rain with winds" }
+	Button mediumRain { text "Medium rain without winds" }
+	Button weakRainWind { text "Weak rain with winds" }
+	Button weakRain { text "Weak rain without winds" }
+}
+
+View photoView {
+	title "Citizen observation of floods"
+	
+	// TODO take image
+	Spacer
+}
+
+View incidentsView {
+	title "Citizen observation of floods"
+	
+	//TODO List of incidents
+	Spacer
+	
+	//TODO tabs to home, inform, profile
+	Button addEvent { text "Inform about new flood event" }
+	//Button showProfiles { text "Show profile" }
+	Button backButton { text "Back" }
+}
+
+View profileListView {
+	title "Citizen observation of floods"
+	
+	//TODO List of profiles
+	Spacer
+}

@@ -23,27 +23,130 @@ WorkflowElement addIncidentWFE {
 	
 	action CustomAction init {
 		// shareView
-		bind action GotoView( streetView ) on shareView.sharingStreet.onClick
+		bind action GotoView( roadView ) on shareView.sharingRoad.onClick
 		bind action GotoView( riverSelectionView ) on shareView.sharingRiver.onClick
 		bind action GotoView( rainView ) on shareView.sharingRain.onClick
 		bind action GotoView( photoView ) on shareView.sharingImage.onClick
+		bind action submitAction on shareView.done.onClick
 		
 		// riverSelectionView
 		bind action GotoView( riverView ) on riverSelectionView.waterStreet.onClick
 		bind action GotoView( heightView ) on riverSelectionView.waterHeight.onClick
 		bind action GotoView( colorView ) on riverSelectionView.waterColor.onClick
 		
+		// streetView
+		bind action roadActionPassable on roadView.passable.onClick
+		bind action roadActionNotPassable on roadView.notPassable.onClick
+		
+		// riverView
+		bind action riverActionOverflowing on riverView.riverOverflowing.onClick
+		bind action riverActionHigh on riverView.riverHigh.onClick
+		bind action riverActionModerate on riverView.riverModerate.onClick
+		bind action riverActionLow on riverView.riverLow.onClick
+		
+		// heightView
+		bind action riverActionAboveHead on heightView.heightAboveHead.onClick
+		bind action riverActionNeck on heightView.heightNeck.onClick
+		bind action riverActionWaist on heightView.heightWaist.onClick
+		bind action riverActionKnee on heightView.heightKnee.onClick
+		bind action riverActionAnkle on heightView.heightAnkle.onClick
+		
+		// colorView
+		bind action riverActionRed on colorView.colorRed.onClick
+		bind action riverActionYellow on colorView.colorYellow.onClick
+		bind action riverActionGreen on colorView.colorGreen.onClick
+		
+		// Create new event
+		call ContentProviderReset ( :EventProvider )
+		set :EventProvider.positionLatitude = :location.latitude
+		set :EventProvider.positionLongitude = :location.longitude
+		set :EventProvider.timeOfEvent = now 
 	}
 	
-	action CustomAction firstAction {
-		call FireEvent (BasicEvent)
+	action CustomAction submitAction {
+		call FireEvent (SubmitEvent)
+	}
+	
+	action CustomAction roadActionPassable {
+		set :EventProvider.roadCondition = RoadCondition::passable
+		call saveAndReturn
+	}
+	
+	action CustomAction roadActionNotPassable {
+		set :EventProvider.roadCondition = RoadCondition::notPassable
+		call saveAndReturn
+	}
+	
+	action CustomAction riverActionOverflowing {
+		set :EventProvider.riverHeight = RiverHeight::riverOverflowing
+		call saveAndReturn
+	}
+	
+	action CustomAction riverActionHigh {
+		set :EventProvider.riverHeight = RiverHeight::riverHigh
+		call saveAndReturn
+	}
+	
+	action CustomAction riverActionModerate {
+		set :EventProvider.riverHeight = RiverHeight::riverModerate
+		call saveAndReturn
+	}
+	
+	action CustomAction riverActionLow {
+		set :EventProvider.riverHeight = RiverHeight::riverLow
+		call saveAndReturn
+	}
+	
+	action CustomAction riverActionAboveHead {
+		set :EventProvider.riverHeightRelative = RiverHeightRelative::heightAboveHead
+		call saveAndReturn
+	}
+	
+	action CustomAction riverActionNeck {
+		set :EventProvider.riverHeightRelative = RiverHeightRelative::heightNeck
+		call saveAndReturn
+	}
+	
+	action CustomAction riverActionWaist {
+		set :EventProvider.riverHeightRelative = RiverHeightRelative::heightWaist
+		call saveAndReturn
+	}
+	
+	action CustomAction riverActionKnee {
+		set :EventProvider.riverHeightRelative = RiverHeightRelative::heightKnee
+		call saveAndReturn
+	}
+	
+	action CustomAction riverActionAnkle {
+		set :EventProvider.riverHeightRelative = RiverHeightRelative::heightAnkle
+		call saveAndReturn
+	}
+	
+	action CustomAction riverActionRed {
+		set :EventProvider.riverHeightColor = RiverHeightColor::colorRed
+		call saveAndReturn
+	}
+	
+	action CustomAction riverActionYellow {
+		set :EventProvider.riverHeightColor = RiverHeightColor::colorYellow
+		call saveAndReturn
+	}
+	
+	action CustomAction riverActionGreen {
+		set :EventProvider.riverHeightColor = RiverHeightColor::colorGreen
+		call saveAndReturn
+	}
+	
+	action CustomAction saveAndReturn {
+		call ContentProviderOperation(save :EventProvider)
+		call GotoView( shareView )
 	}
 	
 	processChain  firstProcessChain {
 		step firstStep:
 			view shareView
 		step roadStep:
-			view streetView
+			view roadView
 		step riverSelection:
 			view riverSelectionView
 	}
@@ -59,7 +162,6 @@ WorkflowElement seeIncidentsWFE {
 	action CustomAction init {
 		// incidentsView
 		bind action addAction on incidentsView.addEvent.onClick
-		bind action leaveAction on incidentsView.backButton.onClick
 		//bind action GotoView( profileListView ) on incidentsView.showProfiles.onClick
 	}
 	
@@ -67,12 +169,17 @@ WorkflowElement seeIncidentsWFE {
 		call FireEvent (AddIncidentEvent)
 	}
 	
-	action CustomAction leaveAction {
-		call FireEvent (BasicEvent)
-	}
-	
 	processChain  firstProcessChain {
 		step firstStep:
 			view incidentsView
 	}
+}
+
+contentProvider FloodEvent EventProvider {
+	providerType local
+}
+
+contentProvider FloodEvent[] EventList {
+	providerType local
+	filter all
 }

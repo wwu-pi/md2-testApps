@@ -5,15 +5,11 @@ package de.wwu.md2.floodApp.workflows
  */
  
 WorkflowElement addIncidentWFE
-	fires BasicEvent {
+	fires SubmitEvent {
 		end workflow
 	}
 	
 WorkflowElement seeIncidentsWFE
-	fires BasicEvent {
-		end workflow
-	}
-	
 	fires AddIncidentEvent {
 		start addIncidentWFE
 	}

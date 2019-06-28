@@ -3,3 +3,37 @@ package de.wwu.md2.floodApp.models
 /*
  * Implement the model here
  */
+entity FloodEvent {
+	timeOfEvent: datetime
+	positionLatitude: string
+	positionLongitude: string
+	
+	roadCondition: RoadCondition
+	rainIntensity: RainIntensity
+	riverHeight: RiverHeight
+	riverHeightRelative: RiverHeightRelative
+	riverHeightColor: RiverHeightColor
+	
+	//TODO photo
+}
+
+enum RoadCondition {
+	undefined "undefined", passable "Passable", notPassable "Not passable"
+}
+
+enum RainIntensity {
+	undefined "undefined", heavyRainWind "Heavy rain and wind", heavyRain "Heavy rain", mediumRainWind "Medium rain and wind", mediumRain "Medium rain", weakRainWind "Weak rain and wind", weakRain "Weak rain"
+}
+
+enum RiverHeight {
+	undefined "undefined", riverOverflowing "Overflowing", riverHigh "High", riverModerate "Moderate", riverLow "Low"
+}
+
+enum RiverHeightRelative {
+	undefined "undefined", heightAboveHead "Above head", heightNeck "Neck", heightWaist "Waist", heightKnee "Knee", heightAnkle "Ankle"
+}
+
+enum RiverHeightColor {
+	undefined "undefined", colorRed "Red", colorYellow "Yellow", colorGreen "Green"
+}
+

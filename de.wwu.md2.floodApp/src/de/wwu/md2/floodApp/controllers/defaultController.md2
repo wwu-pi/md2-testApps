@@ -56,6 +56,14 @@ WorkflowElement addIncidentWFE {
 		bind action riverActionYellow on colorView.colorYellow.onClick
 		bind action riverActionGreen on colorView.colorGreen.onClick
 		
+		// rainView
+		bind action rainActionHeavyRW on rainView.heavyRainWind.onClick
+		bind action rainActionHeavyR on rainView.heavyRain.onClick
+		bind action rainActionMediumRW on rainView.mediumRainWind.onClick
+		bind action rainActionMediumR on rainView.mediumRain.onClick
+		bind action rainActionLowRW on rainView.weakRainWind.onClick
+		bind action rainActionLowR on rainView.weakRain.onClick
+				
 		// Create new event
 		call ContentProviderReset ( :EventProvider )
 		set :EventProvider.positionLatitude = :location.latitude
@@ -134,6 +142,36 @@ WorkflowElement addIncidentWFE {
 	
 	action CustomAction riverActionGreen {
 		set :EventProvider.riverHeightColor = RiverHeightColor::colorGreen
+		call saveAndReturn
+	}
+	
+	action CustomAction rainActionHeavyRW {
+		set :EventProvider.rainIntensity = RainIntensity::heavyRainWind
+		call saveAndReturn
+	}
+	
+	action CustomAction rainActionHeavyR {
+		set :EventProvider.rainIntensity = RainIntensity::heavyRain
+		call saveAndReturn
+	}
+	
+	action CustomAction rainActionMediumRW {
+		set :EventProvider.rainIntensity = RainIntensity::mediumRainWind
+		call saveAndReturn
+	}
+	
+	action CustomAction rainActionMediumR {
+		set :EventProvider.rainIntensity = RainIntensity::mediumRain
+		call saveAndReturn
+	}
+	
+	action CustomAction rainActionLowRW {
+		set :EventProvider.rainIntensity = RainIntensity::weakRainWind
+		call saveAndReturn
+	}
+	
+	action CustomAction rainActionLowR {
+		set :EventProvider.rainIntensity = RainIntensity::weakRain
 		call saveAndReturn
 	}
 	

@@ -19,10 +19,10 @@ View incidentsView {
 View shareView {
 	title "Share an incident"
 	
-	Button sharingRoad { text "Water height in the streets" }
-	Button sharingRiver { text "Water height on the river bed" }
-	Button sharingRain { text "Intensity of rain" }
-	Button sharingImage { text "Submit an image" }
+	Button sharingRoad { text "Water height in the streets" style { icon "traffic" }}
+	Button sharingRiver { text "Water height on the river bed" style { icon "wave" }}
+	Button sharingRain { text "Intensity of rain" style { icon "wb_cloudy" }}
+	Button sharingImage { text "Submit an image" style { icon "photo_camera" }}
 	
 	Spacer
 	
@@ -32,56 +32,54 @@ View shareView {
 View roadView {
 	title "Road conditions"
 	
-	Button passable { text "Passable" }
-	Spacer ( number 2 )
-	Button notPassable { text "Not passable" }
+	Button passable { text "Passable" style { icon "car_passable" }}
+	Button notPassable { text "Not passable" style { icon "car_impassable" }}
 }
 
 View riverSelectionView {
 	title "Water height on the river bed"
 	
-	Button waterStreet { text "Height of the flood in the streets" }
-	Button waterHeight { text "Water height relative to a person" }
-	Button waterColor { text "Water color range" }
-	
+	Button waterStreet { text "Height of the flood in the streets" style { icon "water_low" }}
+	Button waterHeight { text "Water height relative to a person" style { icon "height_person" }}
+	Button waterColor { text "Water color range" style { icon "triangle_ryg" }}
 }
 
 View riverView {
 	title "Height of the flood in the river"
 	
-	Button riverOverflowing { text "Overflowing" }
-	Button riverHigh { text "High" }
-	Button riverModerate { text "Moderate" }
-	Button riverLow { text "Low" }	
+	Button riverOverflowing { text "Overflowing" style { icon "water_overflowing" }}
+	Button riverHigh { text "High" style { icon "water_high" }}
+	Button riverModerate { text "Moderate" style { icon "water_medium" }}
+	Button riverLow { text "Low" style { icon "water_low" }}	
 }
 
 View heightView {
 	title "Water height relative to a person"
 	
-	Button heightAboveHead { text "Above the head" } 
-	Button heightNeck { text "To the neck" }
-	Button heightWaist { text "To the waist" }
-	Button heightKnee { text "To the knee" }
-	Button heightAnkle { text "To the ankle" }
+	Button heightAboveHead { text "Above the head" style { icon "height_head" }} 
+	Button heightNeck { text "To the neck" style { icon "height_neck" }}
+	Button heightWaist { text "To the waist" style { icon "height_waist" }}
+	Button heightKnee { text "To the knee" style { icon "height_knee" }}
+	Button heightAnkle { text "To the ankle" style { icon "height_ankle" }}
 }
 
 View colorView {
 	title "Water color range"
 	
-	Button colorRed { text "Red" } 
-	Button colorYellow { text "Yellow" }
-	Button colorGreen { text "Green" }
+	Button colorRed { text "Red" style { icon "triangle_red" }} 
+	Button colorYellow { text "Yellow" style { icon "triangle_yellow" }}
+	Button colorGreen { text "Green" style { icon "triangle_green" }}
 }
 
 View rainView {
 	title "Weather conditions"
 	
-	Button heavyRainWind { text "Heavy rain with winds" } 
-	Button heavyRain { text "Heavy rain without winds" }
-	Button mediumRainWind { text "Medium rain with winds" }
-	Button mediumRain { text "Medium rain without winds" }
-	Button weakRainWind { text "Weak rain with winds" }
-	Button weakRain { text "Weak rain without winds" }
+	Button heavyRainWind { text "Heavy rain with winds" style { icon "rain_wind_strong" }} 
+	Button heavyRain { text "Heavy rain without winds" style { icon "rain_strong" }}
+	Button mediumRainWind { text "Medium rain with winds" style { icon "rain_wind_moderate" }}
+	Button mediumRain { text "Medium rain without winds" style { icon "rain_moderate" }}
+	Button weakRainWind { text "Weak rain with winds" style { icon "rain_wind_low" }}
+	Button weakRain { text "Weak rain without winds" style { icon "rain_low" }}
 }
 
 View photoView {

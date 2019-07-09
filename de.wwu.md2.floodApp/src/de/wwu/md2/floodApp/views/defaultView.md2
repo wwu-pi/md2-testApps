@@ -10,10 +10,29 @@ View incidentsView {
 	
 	ListView incidentList {
 		connectedProvider :EventList.timeOfEvent
+		onClickAction seeIncidentsWFE.showDetails
 	}
 	
 	//TODO tabs to home, inform, profile
 	//Button showProfiles { text "Show profile" }
+}
+
+View detailsView {
+	title "Incident details"
+	
+	DateTimeInput timeOfEvent { tooltip "Time of event:" disabled true }
+	Label roadCondition { text "Road condition:" }
+	Label roadConditionValue { text "" }
+	Label rainIntensity { text "Rain intensity:" }
+	Label rainIntensityValue { text "" }
+	Label riverHeight { text "Height of the flood in the river:" }
+	Label riverHeightValue { text "" }
+	Label riverHeightRelative { text "Water height relative to a person:" }
+	Label riverHeightRelativeValue { text "" }
+	Label riverHeightColor { text "" }
+	Label riverHeightColorValue { text "Water color range:" }
+	
+	Button returnButton { text "Return to list" }
 }
 
 View shareView {
@@ -39,7 +58,7 @@ View roadView {
 View riverSelectionView {
 	title "Water height on the river bed"
 	
-	Button waterStreet { text "Height of the flood in the streets" style { icon "water_low" }}
+	Button waterStreet { text "Height of the flood in the river" style { icon "water_low" }}
 	Button waterHeight { text "Water height relative to a person" style { icon "height_person" }}
 	Button waterColor { text "Water color range" style { icon "triangle_ryg" }}
 }
@@ -85,8 +104,12 @@ View rainView {
 View photoView {
 	title "Citizen observation of floods"
 	
-	// TODO take image
-	Spacer
+	TextInput photoComment { tooltip "Write a comment" }
+
+	Image imageOutput { src "" height 50 } 
+	Button capturePhoto { text "Take a picture" }
+	
+	Button saveAndReturn { text "Save and return" }
 }
 
 View profileListView {

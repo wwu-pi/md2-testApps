@@ -63,7 +63,12 @@ WorkflowElement addIncidentWFE {
 		bind action rainActionMediumR on rainView.mediumRain.onClick
 		bind action rainActionLowRW on rainView.weakRainWind.onClick
 		bind action rainActionLowR on rainView.weakRain.onClick
-				
+		
+		// photoView
+		map photoView.photoComment to :EventProvider.photoComment
+		bind action Camera(:EventProvider.photo) on photoView.capturePhoto.onClick
+		bind action saveAndReturn on photoView.saveAndReturn.onClick
+			
 		// Create new event
 		call ContentProviderReset ( :EventProvider )
 		set :EventProvider.positionLatitude = :location.latitude
@@ -175,6 +180,11 @@ WorkflowElement addIncidentWFE {
 		call saveAndReturn
 	}
 	
+	action CustomAction takePhotoAction {
+		call Camera(:EventProvider.photo)
+		call saveAndReturn
+	}
+	
 	action CustomAction saveAndReturn {
 		call ContentProviderOperation(save :EventProvider)
 		call GotoView( shareView )
@@ -199,17 +209,31 @@ WorkflowElement seeIncidentsWFE {
 	
 	action CustomAction init {
 		// incidentsView
-		bind action addAction on incidentsView.addEvent.onClick
+		bind action FireEvent (AddIncidentEvent) on incidentsView.addEvent.onClick
 		//bind action GotoView( profileListView ) on incidentsView.showProfiles.onClick
+		
+		// Mappings for detailsView
+		map detailsView.timeOfEvent to :EventProvider.timeOfEvent
+		map detailsView.roadConditionValue to :EventProvider.roadCondition
+		map detailsView.rainIntensityValue to :EventProvider.rainIntensity
+		map detailsView.riverHeightValue to :EventProvider.riverHeight
+		map detailsView.riverHeightRelativeValue to :EventProvider.riverHeightRelative
+		map detailsView.riverHeightColorValue to :EventProvider.riverHeightColor
+		
+		// detailsView
+		bind action GotoView( incidentsView ) on detailsView.returnButton.onClick
 	}
-	
-	action CustomAction addAction {
-		call FireEvent (AddIncidentEvent)
+
+	action CustomAction showDetails {
+		call ContentProviderGetActive(:EventProvider, :EventList)
+		call GotoView( detailsView )
 	}
 	
 	processChain  firstProcessChain {
-		step firstStep:
+		step listStep:
 			view incidentsView
+		step detailsStep:
+			view detailsView
 	}
 }
 

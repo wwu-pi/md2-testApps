@@ -14,7 +14,8 @@ entity FloodEvent {
 	riverHeightRelative: RiverHeightRelative
 	riverHeightColor: RiverHeightColor
 	
-	//TODO photo
+	photo: file
+	photoComment: string
 }
 
 enum RoadCondition {

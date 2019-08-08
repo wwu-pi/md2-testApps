@@ -219,6 +219,8 @@ WorkflowElement seeIncidentsWFE {
 		map detailsView.riverHeightValue to :EventProvider.riverHeight
 		map detailsView.riverHeightRelativeValue to :EventProvider.riverHeightRelative
 		map detailsView.riverHeightColorValue to :EventProvider.riverHeightColor
+		map detailsView.photoValue to :EventProvider.photo
+		map detailsView.photoCommentValue to :EventProvider.photoComment
 		
 		// detailsView
 		bind action GotoView( incidentsView ) on detailsView.returnButton.onClick
